@@ -6,7 +6,9 @@ class Listenf extends React.Component {
     constructor(props) {
         super(props);
     }
-    state = { datosCargados:false }
+    state = { datosCargados:false,
+              enfermedades:[]
+            }
 
     cargarEnfermedades(){
         fetch("http://localhost/API/Catalogos/Enfermedades/SP_Ver_Todas_enfermedades_lista.php")
@@ -32,7 +34,7 @@ componentDidMount(){
             return ( 
 <div className="card">
     <div className="card-header">
-                    <Link className="btn btn-success" to={"/insertenf"}  >Agregar enfermedad</Link>
+                    <Link className="btn btn-success" to={"/insertenf"}>Agregar enfermedad</Link>
                     </div>
                     <div className="card-body">
                         <h4>Lista de Enfermedades</h4>

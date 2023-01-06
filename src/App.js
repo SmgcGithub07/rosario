@@ -4,7 +4,7 @@ import Listenf from "./componentes/catalogos/enfermedades/Listar-enfermedades";
 import Insert from "./componentes/catalogos/enfermedades/Insertar-enfermedades";
 import Editenf from "./componentes/catalogos/enfermedades/Editar-enfermedades";
 import { Routes, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 
 
 
