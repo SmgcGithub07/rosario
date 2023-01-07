@@ -1,5 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link  } from "react-router-dom";
+
+ 
+
 
 class Insertarenfermedades extends React.Component {
     constructor(props) {
@@ -22,13 +25,10 @@ class Insertarenfermedades extends React.Component {
           const {txtnombreenf, txtdescripenf}=this.state;
           console.log(txtnombreenf);
           console.log(txtdescripenf);
+          
 
-          try {
-
-                if(this.txtnombreenf==null){
-                     alert("¡No puede dejar nulo el nombre de la enfermedad!");
-                }
-                else{
+          try {   
+                
                     var datosEnviar={Nombre_enf:txtnombreenf, Descrip:txtdescripenf}
 
                     fetch("http://localhost/API/Catalogos/Enfermedades/Sp_Insert_Enfermedades.php",{
@@ -47,23 +47,27 @@ class Insertarenfermedades extends React.Component {
                             break;                         
                             
                             case "Registro guardado":
-                                alert(datosRespuesta);
-                                this.props.history.push("/listarenf");
+                                
+                                alert(datosRespuesta,  this.props.history.push("/listarenf")); 
+                                this.props.history.push("/listarenf");                  
                             break;
                           }
                      }
                     )
                     .catch(console.log)
-                }    
+                 
           } catch (error) {
-            console.log(error);
+            alert(error);
           }
-    }   
+    }    
+   
+    
 
     render() { 
 
         const {txtnombreenf, txtdescripenf}=this.state;
-         
+       
+        
 
         return ( 
              <div className="card">
@@ -88,6 +92,7 @@ class Insertarenfermedades extends React.Component {
                                     <span className="input-group-btn">                                        
                                         <button className="btn btn-success" type="submit" aria-label="">Guardar</button>
                                         <Link to={"/listarenf"} className="btn btn-danger" type="button" aria-label="">Cancelar</Link>
+                                        <Link to={"/listarenf"} className="btn btn-warning" type="button" aria-label="">Regresar al Listado</Link>
                                    </span>                                    
                                  </div> 
                               
