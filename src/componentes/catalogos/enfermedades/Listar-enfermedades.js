@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 class Listenf extends React.Component {
-    constructor(props) {
+    constructor(props) { 
         super(props);
     }
     state = { datosCargados:false,
@@ -56,7 +56,7 @@ componentDidMount(){
                             <td>{enfermedades.Descrip}</td>
                           <td>
                            <div className="btn-group" role="group" aria-label="">                              
-                               <Link className="btn btn-warning" to={"/editenf"} >Editar</Link>
+                               <Link className="btn btn-warning" to={"/editenf/"+enfermedades.Id_enfermedad} >Editar</Link>
                             </div>
                           </td>
                          </tr>

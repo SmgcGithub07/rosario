@@ -1,34 +1,27 @@
 import React from "react";
-import { Link  } from "react-router-dom";
-
- 
+import { Link } from "react-router-dom";
 
 
 class Insertarenfermedades extends React.Component {
     constructor(props) {
-        super(props);
+        super(props);       
     }
     state = { 
         txtnombreenf:"",
         txtdescripenf:""
+        
      }
 
      cambiodeValor=(e)=>{
         const state=this.state;
         state[e.target.name]=e.target.value;
         this.setState({state});
-     }
+     }      
 
-    enviarDatos = (e) =>{
-          e.preventDefault();
-          console.log("Enviando datos");
-          const {txtnombreenf, txtdescripenf}=this.state;
-          console.log(txtnombreenf);
-          console.log(txtdescripenf);
-          
-
-          try {   
-                
+     enviarDatos = (e) =>{
+          e.preventDefault();          
+          const {txtnombreenf, txtdescripenf}=this.state;   
+          try {                   
                     var datosEnviar={Nombre_enf:txtnombreenf, Descrip:txtdescripenf}
 
                     fetch("http://localhost/API/Catalogos/Enfermedades/Sp_Insert_Enfermedades.php",{
@@ -46,10 +39,9 @@ class Insertarenfermedades extends React.Component {
                                 alert(datosRespuesta);
                             break;                         
                             
-                            case "Registro guardado":
-                                
-                                alert(datosRespuesta,  this.props.history.push("/listarenf")); 
-                                this.props.history.push("/listarenf");                  
+                            case "Registro guardado": 
+                                alert(datosRespuesta); 
+                                this.cancelCourse();                                                                               
                             break;
                           }
                      }
@@ -59,15 +51,16 @@ class Insertarenfermedades extends React.Component {
           } catch (error) {
             alert(error);
           }
-    }    
-   
-    
+    }   
+         cancelCourse = () => {           
+          this.setState({
+               txtnombreenf: "",
+               txtdescripenf: ""                                
+            });                 
+          }  
 
     render() { 
-
-        const {txtnombreenf, txtdescripenf}=this.state;
-       
-        
+        const {txtnombreenf, txtdescripenf}=this.state;  
 
         return ( 
              <div className="card">
@@ -75,10 +68,10 @@ class Insertarenfermedades extends React.Component {
                     Agregar Enfermedades
                 </div>
                 <div className="card-body">
-                    <form onSubmit={this.enviarDatos}>                      
+                    <form onSubmit={this.enviarDatos} id="webFrmInsertarEnf">                      
                                 <div className="form-group">
                                      <label htmlFor="">Nombre de la enfermedad:</label>
-                                     <input type="text" onChange={this.cambiodeValor} value={txtnombreenf}  name="txtnombreenf" id="txtnombreenf" className="form-control" aria-describedby="helpId" size={50}  placeholder="Teclea el nombre de la enfermedad" ></input>
+                                     <input type="text" onChange={this.cambiodeValor} value={txtnombreenf}  name="txtnombreenf" id="txtnombreenf" className="form-control" aria-describedby="helpId" size={50}  placeholder="Teclea el nombre de la enfermedad" required ></input>
                                      
                                 </div>
                                  
@@ -92,18 +85,13 @@ class Insertarenfermedades extends React.Component {
                                     <span className="input-group-btn">                                        
                                         <button className="btn btn-success" type="submit" aria-label="">Guardar</button>
                                         <Link to={"/listarenf"} className="btn btn-danger" type="button" aria-label="">Cancelar</Link>
-                                        <Link to={"/listarenf"} className="btn btn-warning" type="button" aria-label="">Regresar al Listado</Link>
+                                        <Link to={"/listarenf"} className="btn btn-warning" type="button" aria-label="" id="btnsalir" >Regresar al Listado</Link>
                                    </span>                                    
-                                 </div> 
-                              
+                                 </div>                              
                     </form>                             
-                </div>
-                
+                </div>                
              </div>
-
-
          );
     }
-}
- 
+} 
 export default Insertarenfermedades;

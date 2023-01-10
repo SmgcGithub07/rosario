@@ -23,7 +23,7 @@ function App() {
               <Routes>  
                   <Route path="/listarenf" element={<Listenf />} />
                   <Route path="/insertenf" element={<Insert />} />
-                  <Route path="/editenf" element={<Editenf />} />
+                  <Route path="/editenf/:id" element={<Editenf />} />
             </Routes> 
           </div>   
        );
